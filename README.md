@@ -51,7 +51,7 @@ Project folder: [Sales Funnel SQL Analysis](sales-funnel-sql/)
 
 Future additions will expand into:
 
-- Power BI data modeling
+- Power BI / Tableau data modeling
 - Python-based analytics workflows
 - R-based statistical analysis
 
