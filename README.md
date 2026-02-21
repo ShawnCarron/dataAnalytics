@@ -2,7 +2,9 @@
 
 This repository contains structured analytics projects focused on business problem solving, metric integrity, and practical data modeling.
 
-The purpose of this portfolio is not just to showcase code, but to demonstrate disciplined analytical thinking and control over metrics.
+The objective of this portfolio is not simply to showcase code, but to demonstrate disciplined analytical thinking, controlled metric design, and defensible logic.
+
+Projects are built around realistic business scenarios such as conversion modeling, sales funnel analysis, revenue tracking, and performance diagnostics.
 
 ---
 
@@ -11,18 +13,18 @@ The purpose of this portfolio is not just to showcase code, but to demonstrate d
 Each project in this repository includes:
 
 - A clearly defined business question  
+- Explicit dataset assumptions  
 - Structured analytical logic (primarily SQL)  
-- Explicit assumptions and modeling decisions  
-- Conversion or metric calculations  
-- Clean documentation explaining the approach  
+- Controlled aggregation and grain definition  
+- Defensive metric calculations  
+- Clear documentation of approach and outcomes  
 
-Projects are organized into folders and include their own README files that explain:
+Projects are organized into dedicated folders and include their own README files explaining:
 
 - The problem being solved  
-- The dataset assumptions  
-- The analytical methodology  
-- The resulting metrics  
-- Key insights or takeaways  
+- The modeling decisions made  
+- The query structure and logic  
+- The resulting metrics and interpretations  
 
 ---
 
@@ -30,43 +32,43 @@ Projects are organized into folders and include their own README files that expl
 
 ### Sales Funnel SQL Analysis
 
-An event-based funnel model over a rolling 30-day window, including:
+Event-based funnel modeling over a rolling 30-day window, including:
 
 - Stage-to-stage conversion rates  
 - Traffic source performance  
-- Daily funnel trends  
-- Funnel drop-off analysis  
+- Daily funnel trend analysis  
+- Funnel drop-off modeling  
 
-Project folder: `sales-funnel-sql/`
-
----
-
-## Tools Used
-
-- SQL (CTEs, aggregations, conditional logic, conversion modeling)  
-- MySQL  
-- Git / GitHub for version control and documentation  
-
-Future additions may include:
-
-- Power BI data modeling  
-- Python-based analytics workflows  
-- R-based statistical analysis  
+Project folder: [Sales Funnel SQL Analysis](sales-funnel-sql/)
 
 ---
 
-## Approach & Philosophy
+## Tools & Technologies
 
-Strong analytics is not about writing queries that run.
+- SQL (CTEs, conditional aggregation, conversion modeling)
+- MySQL
+- Git / GitHub for structured version control and documentation
 
-It is about writing logic that preserves meaning.
+Future additions will expand into:
+
+- Power BI data modeling
+- Python-based analytics workflows
+- R-based statistical analysis
+
+---
+
+## Analytical Philosophy
+
+Strong analytics is not about writing queries that execute.
+
+It is about designing logic that preserves business meaning.
 
 Projects in this repository emphasize:
 
-- Defined grain  
-- Intentional joins  
-- Defensive metric calculations  
-- Clear business framing  
-- Structured documentation  
+- Defined grain before aggregation  
+- Intentional join selection  
+- Prevention of metric distortion  
+- Clear separation of logic and presentation  
+- Documentation that explains both *what* was built and *why*  
 
-This repository will continue to evolve as additional analytics projects are completed and documented.
+This portfolio will continue to evolve as additional analytics projects are developed and documented.
