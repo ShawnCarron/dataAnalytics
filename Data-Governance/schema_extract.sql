@@ -6,7 +6,34 @@
    ============================================================================ */
 
 -- ============================================================================
--- OPTION A: POSTGRESQL VERSION
+-- OPTION A: MYSQL VERSION
+-- Replace DATABASE() with a specific schema name in quotes if needed
+-- ============================================================================
+
+SELECT 
+    'AST-TBD'                                           AS Asset_ID,
+    c.TABLE_NAME                                        AS Asset_Name,
+    c.COLUMN_NAME                                       AS Field_Name,
+    UPPER(c.COLUMN_TYPE)                                AS Data_Type,
+    COALESCE(NULLIF(c.COLUMN_COMMENT, ''), 'Needs business definition') AS Business_Definition,
+    CASE 
+        WHEN LOWER(c.COLUMN_NAME) REGEXP '(email|phone|ssn|sin|dob|birth|address|postal|zip|first_name|last_name|full_name|password|credit|card|ip_address)'
+            THEN 'Yes'
+        ELSE 'No'
+    END                                                 AS Contains_PII,
+    CONCAT('Extracted from MySQL (', c.TABLE_SCHEMA, '.', c.TABLE_NAME, ')') AS Source_Logic,
+    TRIM(BOTH '; ' FROM CONCAT(
+        CASE WHEN c.IS_NULLABLE = 'NO' THEN 'NOT NULL; ' ELSE '' END,
+        CASE WHEN c.COLUMN_KEY = 'PRI' THEN 'PRIMARY KEY; ' ELSE '' END,
+        CASE WHEN c.COLUMN_KEY = 'UNI' THEN 'UNIQUE; ' ELSE '' END
+    ))                                                  AS Validation_Rules
+FROM information_schema.COLUMNS c
+WHERE c.TABLE_SCHEMA = DATABASE()
+ORDER BY c.TABLE_NAME, c.ORDINAL_POSITION;
+
+
+-- ============================================================================
+-- OPTION B: POSTGRESQL VERSION
 -- Replace 'public' with your target schema name (e.g., 'sales', 'crm')
 -- ============================================================================
 SELECT 
@@ -42,29 +69,5 @@ WHERE c.table_schema = 'public'
 ORDER BY c.table_name, c.ordinal_position;
 
 
--- ============================================================================
--- OPTION B: MYSQL VERSION
--- Replace DATABASE() with a specific schema name in quotes if needed
--- ============================================================================
-/*
-SELECT 
-    'AST-TBD'                                           AS Asset_ID,
-    c.TABLE_NAME                                        AS Asset_Name,
-    c.COLUMN_NAME                                       AS Field_Name,
-    UPPER(c.COLUMN_TYPE)                                AS Data_Type,
-    COALESCE(NULLIF(c.COLUMN_COMMENT, ''), 'Needs business definition') AS Business_Definition,
-    CASE 
-        WHEN LOWER(c.COLUMN_NAME) REGEXP '(email|phone|ssn|sin|dob|birth|address|postal|zip|first_name|last_name|full_name|password|credit|card|ip_address)'
-            THEN 'Yes'
-        ELSE 'No'
-    END                                                 AS Contains_PII,
-    CONCAT('Extracted from MySQL (', c.TABLE_SCHEMA, '.', c.TABLE_NAME, ')') AS Source_Logic,
-    TRIM(BOTH '; ' FROM CONCAT(
-        CASE WHEN c.IS_NULLABLE = 'NO' THEN 'NOT NULL; ' ELSE '' END,
-        CASE WHEN c.COLUMN_KEY = 'PRI' THEN 'PRIMARY KEY; ' ELSE '' END,
-        CASE WHEN c.COLUMN_KEY = 'UNI' THEN 'UNIQUE; ' ELSE '' END
-    ))                                                  AS Validation_Rules
-FROM information_schema.COLUMNS c
-WHERE c.TABLE_SCHEMA = DATABASE()
-ORDER BY c.TABLE_NAME, c.ORDINAL_POSITION;
-*/
+
+
