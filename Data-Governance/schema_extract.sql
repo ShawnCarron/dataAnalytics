@@ -11,10 +11,10 @@
 -- ============================================================================
 
 SELECT 
-    'AST-TBD'                                           AS Asset_ID,
-    c.TABLE_NAME                                        AS Asset_Name,
-    c.COLUMN_NAME                                       AS Field_Name,
-    UPPER(c.COLUMN_TYPE)                                AS Data_Type,
+    'AST-TBD' AS Asset_ID,
+    c.TABLE_NAME AS Asset_Name,
+    c.COLUMN_NAME AS Field_Name,
+    UPPER(c.COLUMN_TYPE) AS Data_Type,
     COALESCE(NULLIF(c.COLUMN_COMMENT, ''), 'Needs business definition') AS Business_Definition,
     CASE 
         WHEN LOWER(c.COLUMN_NAME) REGEXP '(email|phone|ssn|sin|dob|birth|address|postal|zip|first_name|last_name|full_name|password|credit|card|ip_address)'
